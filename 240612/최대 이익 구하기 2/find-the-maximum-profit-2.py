@@ -1,17 +1,15 @@
 def dfs(arr, visited, cur, n, point):
     global result
-    if point > result:
-        result = point
+
+    if cur > n: return
+    if point > result: result = point
     
     for i in range(cur, n):
         if visited[i] == False:
-            nxt = cur + arr[i][0]
-            if nxt >= n: continue
             visited[i] = True
-            dfs(arr, visited, nxt, n, point + arr[i][1])
+            dfs(arr, visited, cur + arr[i][0], n, point + arr[i][1])
             visited[i] = False
     
-
 
 n = int(input())
 arr = []
