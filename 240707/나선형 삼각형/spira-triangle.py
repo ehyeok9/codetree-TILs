@@ -11,7 +11,7 @@ def dp(n):
 
     return memo[n]
 
-if __name__ == "__main":
+if __name__ == "__main__":
     n = int(input())
     
     if n <= 3:
