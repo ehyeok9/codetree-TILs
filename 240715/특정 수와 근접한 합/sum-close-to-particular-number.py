@@ -2,13 +2,16 @@ import sys
 
 input = sys.stdin.readline
 
-cases = set()
+diff = float("inf")
 
 def dfs(numbers, idxList):
-    global total
+    global total, s, diff
 
     if len(idxList) == 2:
-        cases.add(total - idxList[0] - idxList[1])
+        tsum = total - numbers[idxList[0]] - numbers[idxList[1]]
+        tdiff = abs(s - tsum)
+        if tdiff < diff:
+            diff = tdiff
         return
     
     for i in range(len(numbers)):
@@ -25,9 +28,4 @@ if __name__ == "__main__":
 
     dfs(numbers, [])
 
-    tList = []
-    for tsum in cases:
-        tList.append([abs(total - tsum), tsum])
-    tList.sort()
-
-    print(abs(tList[0][1] - tList[1][1]))
+    print(diff)
