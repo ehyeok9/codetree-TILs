@@ -2,34 +2,32 @@ import sys
 
 input = sys.stdin.readline
 
-maxi = float("inf")
-answer = set()
+cases = set()
 
-def dfs(nums, idx, idxList):
-    global maxi, sumation, answer
-    
+def dfs(numbers, idxList):
+    global total
+
     if len(idxList) == 2:
-        tsum = nums[idxList[0]] + nums[idxList[1]]
-        answer.add(tsum)
+        cases.add(total - idxList[0] - idxList[1])
         return
-
-        
-    for i in range(len(nums)):
+    
+    for i in range(len(numbers)):
         if i not in idxList:
             idxList.append(i)
-            dfs(nums, i, idxList)
+            dfs(numbers, idxList)
             idxList.pop()
+    
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     n, s = map(int, input().split())
-    nums = list(map(int, input().split()))
-    sumation = sum(nums)
+    numbers = list(map(int, input().split()))
+    total = sum(numbers)
 
-    dfs(nums, 0, [])
+    dfs(numbers, [])
 
-    tlist = []
-    for num in answer:
-        tlist.append([abs(sumation - num), num])
-    tlist.sort()
+    tList = []
+    for tsum in cases:
+        tList.append([abs(total - tsum), tsum])
+    tList.sort()
 
-    print(abs(tlist[0][1] - tlist[1][1]))
+    print(tList[0][1] - tList[1][1])
