@@ -3,16 +3,14 @@ import sys
 input = sys.stdin.readline
 
 maxi = float("inf")
-answer = None
+answer = set()
 
 def dfs(nums, idx, idxList):
     global maxi, sumation, answer
     
     if len(idxList) == 2:
-        temp = sumation - idxList[0] - idxList[1]
-        if temp < maxi:
-            answer = abs(idxList[0] - idxList[1])
-            maxi = temp
+        tsum = nums[idxList[0]] + nums[idxList[1]]
+        answer.add(tsum)
         return
 
         
@@ -29,4 +27,9 @@ if __name__ =="__main__":
 
     dfs(nums, 0, [])
 
-    print(answer)
+    tlist = []
+    for num in answer:
+        tlist.append([abs(sumation - num), num])
+    tlist.sort()
+
+    print(tlist[0][1] - tlist[1][1])
