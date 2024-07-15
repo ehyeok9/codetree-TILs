@@ -30,4 +30,4 @@ if __name__ == "__main__":
         tList.append([abs(total - tsum), tsum])
     tList.sort()
 
-    print(tList[0][1] - tList[1][1])
+    print(abs(tList[0][1] - tList[1][1]))
