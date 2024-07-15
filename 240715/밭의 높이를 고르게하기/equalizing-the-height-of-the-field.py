@@ -7,7 +7,7 @@ def search(heights):
 
     answer = float("inf")
 
-    for i in range(n-t):
+    for i in range(n-t+1):
         temp = 0
         for j in range(i, i+t):
             temp += abs(heights[j] - h)
