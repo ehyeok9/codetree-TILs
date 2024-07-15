@@ -32,4 +32,4 @@ if __name__ =="__main__":
         tlist.append([abs(sumation - num), num])
     tlist.sort()
 
-    print(tlist[0][1] - tlist[1][1])
+    print(abs(tlist[0][1] - tlist[1][1]))
