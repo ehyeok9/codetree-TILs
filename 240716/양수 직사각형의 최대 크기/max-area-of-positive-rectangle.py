@@ -20,7 +20,7 @@ def bruteForce(board):
 def simulation(y,x, board):
     global n, m
 
-    temp = 0
+    temp = -1
     height = n
     
     for j in range(x, m):
