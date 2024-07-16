@@ -12,8 +12,6 @@ def bruteForce(board):
         for x in range(m):
             size = simulation(y,x, board)
             answer = max(answer, size)
-        #     print(size, end =" ")
-        # print()
     
     return answer
             
@@ -24,9 +22,9 @@ def simulation(y,x, board):
     height = n
     
     for j in range(x, m):
-        if board[y][j] < 0: break
+        if board[y][j] <= 0: break
         for i in range(y, height):
-            if board[i][j] < 0:
+            if board[i][j] <= 0:
                 height = i
                 break
             temp = max(temp, (j-x+1) * (i-y+1))
