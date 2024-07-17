@@ -2,13 +2,6 @@ import sys
 
 input = sys.stdin.readline
 
-def moving(sequence, loc):
-    tmp = sequence[loc]
-    sequence[loc] = sequence[tmp]
-    sequence[tmp] = tmp
-    return tmp
-
-
 if __name__ == "__main__":
     n, m = map(int, input().split())
     sequence = list(map(int, input().split()))
@@ -17,9 +10,10 @@ if __name__ == "__main__":
     answer = 0
     for i in range(1,n+1):
         temp = 0
-        arr = sequence[:]
+        loc = i
         for j in range(m):
-            temp += moving(arr, i)
+            loc = sequence[loc]
+            temp += loc
         answer = max(answer, temp)
     
     print(answer)
