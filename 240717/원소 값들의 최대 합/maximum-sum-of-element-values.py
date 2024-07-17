@@ -17,8 +17,9 @@ if __name__ == "__main__":
     answer = 0
     for i in range(1,n+1):
         temp = 0
+        arr = sequence[:]
         for j in range(m):
-            temp += moving(sequence, i)
+            temp += moving(arr, i)
         answer = max(answer, temp)
-
+    
     print(answer)
