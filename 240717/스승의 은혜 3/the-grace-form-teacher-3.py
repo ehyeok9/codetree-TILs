@@ -2,8 +2,6 @@ import sys
 
 input = sys.stdin.readline
 
-# 시간복잡도 N^3 제한
-
 def simulation(gifts):
     global n, b
 
@@ -17,12 +15,17 @@ def simulation(gifts):
     answer = 0
     for i in range(n):
         curPrice = totalPrice - (gifts[i][0]//2)
+        curPassed = 0
         for j in range(n):
             if curPrice <= b:
-                answer = max(answer, n-j)
-            if (i == j): continue
+                answer = max(answer, n-j+curPassed)
+                # print(i, j, curPrice, n-j)
+                break
+            if (i == j):
+                curPassed = 1
+                continue
             curPrice -= gifts[j][-1]
-    
+    # print(gifts)
     print(answer)
 
 if __name__=="__main__":
@@ -33,3 +36,10 @@ if __name__=="__main__":
     ]
 
     simulation(gifts)
+    # 78
+    # 8 10 15 17 17 18 -4
+    # 68 17 13 81
+
+    # 10아래가 되는 게 있어야 댐
+    # 11 17 17 15 10 8
+    # 33
