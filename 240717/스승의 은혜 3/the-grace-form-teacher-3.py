@@ -18,9 +18,9 @@ def simulation(gifts):
     for i in range(n):
         curPrice = totalPrice - (gifts[i][0]//2)
         for j in range(n):
-            if (i == j): continue
             if curPrice <= b:
                 answer = max(answer, n-j)
+            if (i == j): continue
             curPrice -= gifts[j][-1]
     
     print(answer)
