@@ -49,4 +49,6 @@ def getPreCalc(x):
 if __name__ == "__main__":
     x, y = input().split()
     
-    solution()
+    if (len(x) == len(y)):
+        print(getAfterCalc(y) - getAfterCalc(x))
+    else: solution()
