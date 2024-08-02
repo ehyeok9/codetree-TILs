@@ -18,8 +18,11 @@ if __name__=="__main__":
     bCard = sorted(list(bCard))
     
     answer = 0
-    for i in range(n):
-        if bCard[i] > aCard[i]:
+    bIdx = 0
+    for aIdx in range(n):
+        if aCard[aIdx] > bCard[bIdx]:
             answer += 1
-    
+            bIdx += 1
+
+    # print(aCard, bCard)
     print(answer)
