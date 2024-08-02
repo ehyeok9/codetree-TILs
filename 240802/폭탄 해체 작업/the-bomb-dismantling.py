@@ -16,7 +16,7 @@ if __name__ == "__main__":
     answer = 0
     for i in range(n):
         point, lh = score[i]
-        extra = sum(visit[:i+2])
+        extra = sum(visit[:i+1])
         if extra <= lh:
             answer += point
             visit[lh] += 1
