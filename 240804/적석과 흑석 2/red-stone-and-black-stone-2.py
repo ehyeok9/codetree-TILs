@@ -6,23 +6,17 @@ input = sys.stdin.readline
 def getMaximum(red, black):
     global c, n
     
-    heapq.heapify(red)
+    red.sort()
     black.sort()
 
     # print(black)
     # print(red)
     answer = 0
-    blackIdx = 0
-    while red:
-        if blackIdx == n: break
-        val = heapq.heappop(red)
-
-        for i in range(blackIdx, n):
-            start, end = black[i]
+    for start, end in black:
+        for val in red:
             if start <= val <= end:
-                blackIdx = i+1
+                red.remove(val)
                 answer += 1
-                break
 
     return answer
 
