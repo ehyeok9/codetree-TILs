@@ -5,13 +5,13 @@ input = sys.stdin.readline
 def getMaximum(red, black):
     global c, n
     
-    black.sort(key = lambda x : (-x[1],-x[0]))
+    black.sort(key = lambda x : (x[0] + x[1])/2, reverse = True)
     red.sort(reverse = True)
     
-    # print(black)
-    # print(red)
     answer = 0
     redIdx = 0
+    # print(black)
+    # print(red)
     for i in range(n):
         start, end = black[i]
         for j in range(redIdx, c):
@@ -19,7 +19,9 @@ def getMaximum(red, black):
                 answer += 1
                 redIdx = j+1
                 # print(black[i], red[j], redIdx)
-                break    
+                break
+
+        if redIdx == c: break
 
     return answer
 
