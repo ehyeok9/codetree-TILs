@@ -5,7 +5,7 @@ input = sys.stdin.readline
 def getMaximum(red, black):
     global c, n
     
-    black.sort(key = lambda x : (x[0] + x[1])/2, reverse = True)
+    black.sort(key = lambda x : ((x[0] + x[1])/2, x[1]), reverse = True)
     red.sort(reverse = True)
     
     answer = 0
