@@ -17,6 +17,7 @@ def getMaximum(red, black):
             if start <= val <= end:
                 red.remove(val)
                 answer += 1
+                break
 
     return answer
 
