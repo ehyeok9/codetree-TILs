@@ -1,27 +1,28 @@
 import sys
+import heapq
 
 input = sys.stdin.readline
 
 def getMaximum(red, black):
     global c, n
     
-    black.sort(key = lambda x : ((x[0] + x[1])/2, x[1]), reverse = True)
-    red.sort(reverse = True)
-    
-    answer = 0
-    redIdx = 0
+    heapq.heapify(red)
+    black.sort()
+
     # print(black)
     # print(red)
-    for i in range(n):
-        start, end = black[i]
-        for j in range(redIdx, c):
-            if start <= red[j] <= end:
-                answer += 1
-                redIdx = j+1
-                # print(black[i], red[j], redIdx)
-                break
+    answer = 0
+    blackIdx = 0
+    while red:
+        if blackIdx == n: break
+        val = heapq.heappop(red)
 
-        if redIdx == c: break
+        for i in range(blackIdx, n):
+            start, end = black[i]
+            if start <= val <= end:
+                blackIdx = i+1
+                answer += 1
+                break
 
     return answer
 
