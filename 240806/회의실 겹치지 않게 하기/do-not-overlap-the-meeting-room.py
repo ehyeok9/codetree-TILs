@@ -9,13 +9,13 @@ if __name__=="__main__":
         for _ in range(n)
     ]
 
-    meetings.sort(key = lambda x : (-x[1], -x[0]))
+    meetings.sort(key = lambda x : x[1])
     # print(meetings)
     answer = 1
-    prev = meetings[0][0]
+    prev = meetings[0][1]
     for i in range(1, n):
         start, end = meetings[i]
-        if end <= prev:
+        if prev <= start:
             answer += 1
             prev = start
 
