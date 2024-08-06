@@ -1,11 +1,12 @@
 import sys
+from sortedcontainers import SortedSet
 
 input = sys.stdin.readline
 
 def greedy(T, AB):
     global c, n
 
-    AB.sort()
+    AB.sort(key = lambda x : x[1])
     T.sort()
 
     answer = 0
