@@ -1,4 +1,5 @@
 import sys
+import math
 
 input = sys.stdin.readline
 
@@ -10,18 +11,9 @@ def check(num):
 if __name__=="__main__":
     num = list(map(int, input().split()))
     
-    answer = 0
-    while True:
-        # print(num)
-        if check(num): break
-
-        if num[1] - num[0] < num[2] - num[1]:
-            num[2] = num[1] + 1
-        else:
-            num[0] = num[1] - 1
-        
-        answer += 1
-        num.sort()
-        
-    
-    print(answer)
+    if check(num):
+        print(0)
+    elif num[0]+ 2 == num[1] or num[1] + 2 == num[2]:
+        print(1)
+    else:
+        print(2)
