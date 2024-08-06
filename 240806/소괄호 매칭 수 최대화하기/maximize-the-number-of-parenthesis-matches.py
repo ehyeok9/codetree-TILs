@@ -5,15 +5,17 @@ input = sys.stdin.readline
 def greedy(brackets):
     global n
 
-    brackets.sort(key = lambda x : (-x[1], -x[2], -x[3]))
+    brackets.sort(key = lambda x : (-x[3], x[2], -x[1]))
     temp = [brackets[i][0] for i in range(n)]
     string = "".join(temp)
     # print(brackets)
+    # print(string)
     answer = calcAnswer(string)
 
     print(answer)
-# 6 6 6 5 4 4 3 0
-# ((()( )(( )( )))(
+
+# (3, 2, 1) / (1,0,1) / (1,1,0) / (4,0,4)
+
 def calcAnswer(string):
     point = string.count(')')
     stringList = list(string)
@@ -34,10 +36,8 @@ def preprocessing(brackets):
     for i in range(n):
         left = brackets[i].count('(')
         right = brackets[i].count(')')
-        isOnlyLeft = -1
-        if right == 0: isOnlyLeft = left
 
-        brackets[i] = [brackets[i], isOnlyLeft, left-right, left]
+        brackets[i] = [brackets[i], left, right, left - right]
 
 if __name__=="__main__":
     n = int(input())
