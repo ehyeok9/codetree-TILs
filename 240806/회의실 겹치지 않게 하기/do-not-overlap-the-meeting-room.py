@@ -17,6 +17,6 @@ if __name__=="__main__":
         start, end = meetings[i]
         if prev <= start:
             answer += 1
-            prev = start
+            prev = end
 
     print(n - answer)
