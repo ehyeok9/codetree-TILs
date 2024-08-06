@@ -1,20 +1,27 @@
 import sys
+from functools import cmp_to_key
 
 input = sys.stdin.readline
+
+def compare(x, y):
+    string1, open1, closed1 = x
+    string2, open2, closed2 = y
+
+    if open1 * closed2 < open2 * closed1:
+        return 1
+    if open1 * closed2 > open2 * closed1:
+        return -1
+    return 0
 
 def greedy(brackets):
     global n
 
-    brackets.sort(key = lambda x : (-x[3], x[2], -x[1]))
+    brackets.sort(cmp_to_key(compare))
     temp = [brackets[i][0] for i in range(n)]
     string = "".join(temp)
-    # print(brackets)
-    # print(string)
     answer = calcAnswer(string)
 
     print(answer)
-
-# (3, 2, 1) / (1,0,1) / (1,1,0) / (4,0,4)
 
 def calcAnswer(string):
     point = string.count(')')
@@ -37,7 +44,7 @@ def preprocessing(brackets):
         left = brackets[i].count('(')
         right = brackets[i].count(')')
 
-        brackets[i] = [brackets[i], left, right, left - right]
+        brackets[i] = [brackets[i], left, right]
 
 if __name__=="__main__":
     n = int(input())
