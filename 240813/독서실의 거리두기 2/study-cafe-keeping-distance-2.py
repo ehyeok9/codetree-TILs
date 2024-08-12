@@ -20,11 +20,11 @@ def calcDistance(seats, cur, direct):
     cnt = 1
     cur += direct
     while (0 <= cur < n):
-        if (seats[cur] == '1'): break
+        if (seats[cur] == '1'): return cnt
         cur += direct
         cnt += 1
     
-    return cnt
+    return float("inf")
 
 def getMinumumDist(seats):
     prev = 0
@@ -44,5 +44,6 @@ if __name__ == "__main__":
     distances.sort(key = lambda x : -x[1])
     
     seats[distances[0][0]] = '1'
-    
+    # print(distances)
+    # print("".join(seats))
     print(getMinumumDist(seats))
