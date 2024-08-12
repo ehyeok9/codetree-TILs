@@ -8,7 +8,7 @@ def getDistances(seats):
     distances = []
     start = 0
     
-    for i in range(1, n):
+    for i in range(n):
         if seats[i] == '0':
             left = calcDistance(seats, i, -1)
             right = calcDistance(seats, i, 1)
@@ -28,8 +28,13 @@ def calcDistance(seats, cur, direct):
 
 def getMinumumDist(seats):
     prev = 0
+    for i in range(0, n):
+        if seats[i] == '1':
+            prev = i
+            break
+
     result = float("inf")
-    for i in range(1, n):
+    for i in range(prev + 1, n):
         if seats[i] == '1':
             result = min(result, i - prev)
             prev = i
