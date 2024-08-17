@@ -29,7 +29,6 @@ def executeCommand(tables, tableNum, direction, visited):
             executeCommand(tables, tableNum - 1, -direction, visited)
         if judge(tables[tableNum], tables[tableNum+1]):
             executeCommand(tables, tableNum + 1, -direction, visited)
-        
 
     if (direction == 1): rotateClock(tables[tableNum])
     else: rotateReversedClock(tables[tableNum])
@@ -37,10 +36,9 @@ def executeCommand(tables, tableNum, direction, visited):
 def calcResult(tables):
     result = 0
     for i in range(4):
-        result += (i+1) * tables[i][0]
+        result += pow(2,i) * tables[i][0]
     return result
     
-
 
 if __name__=="__main__":
     tables = []
