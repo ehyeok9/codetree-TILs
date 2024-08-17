@@ -20,10 +20,12 @@ def executeCommand(tables, tableNum, direction, visited):
     if (visited[tableNum] == True): return
     visited[tableNum] = True
     # print(tableNum, direction)
-    if (tableNum == 0 and judge(tables[tableNum], tables[tableNum+1])):
-        executeCommand(tables, tableNum + 1, -direction, visited)
-    elif (tableNum == 3 and judge(tables[tableNum-1], tables[tableNum])):
-        executeCommand(tables, tableNum - 1, -direction, visited)
+    if (tableNum == 0):
+        if judge(tables[tableNum], tables[tableNum+1]):
+            executeCommand(tables, tableNum + 1, -direction, visited)
+    elif (tableNum == 3):
+        if judge(tables[tableNum-1], tables[tableNum]):
+            executeCommand(tables, tableNum - 1, -direction, visited)
     else:
         if judge(tables[tableNum-1], tables[tableNum]):
             executeCommand(tables, tableNum - 1, -direction, visited)
