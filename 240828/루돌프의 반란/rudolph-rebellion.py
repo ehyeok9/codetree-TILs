@@ -140,10 +140,11 @@ def moveSantas(santas, roudolph):
 
 def simulation():
     roudolph, santas = getSantaAndRoudolphLocs()
-    if santas == []: return
 
     dists = getDistBetween(roudolph, santas)
     dists.sort(key = lambda x : (x[0], -x[1], -x[2]))
+    
+    if dists == []: return
     distance, *santaLoc = dists[0]
     
     roudolph = rushRoudolp(roudolph, santaLoc, santas)
