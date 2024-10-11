@@ -11,10 +11,7 @@ class Tree:
         parent = self.findNode(self.root, PID)
 
         if (parent is not None and self.checkMaxDepth(parent, 2)):
-            if (parent.left is None):
-                parent.left = Node(MID, PID, color, maxDepth, parent)
-            elif (parent.right is None):
-                parent.right = Node(MID, PID, color, maxDepth, parent)
+            parent.child.append(Node(MID, PID, color, maxDepth, parent))
     
     def changeColor(self, MID, color):
         node = self.findNode(self.root, MID)
@@ -23,8 +20,9 @@ class Tree:
             if node is None:
                 return
             node.color = color
-            doChange(node.left, color)
-            doChange(node.right, color)
+            
+            for child in node.child:
+                doChange(child, color)
         
         doChange(node, color)
 
@@ -32,7 +30,6 @@ class Tree:
         node = self.findNode(self.root, MID)
         if node is not None:
             return node.color
-        return None
     
     def getPoint(self, node):
         def calc(node, colors):
@@ -42,8 +39,11 @@ class Tree:
             if node.color not in colors:
                 colors.append(node.color)
                 cur += 1
-
-            return calc(node.left, colors) + calc(node.right, colors) + cur
+            
+            for child in node.child:
+                cur += calc(child, colors)
+            
+            return cur
 
         return pow(calc(node, []), 2)
     
@@ -51,10 +51,11 @@ class Tree:
         if node is None:
             return 0
         
-        left = self.getAmountPoint(node.left)
-        right = self.getAmountPoint(node.right)
+        sumation = 0
+        for child in node.child:
+            sumation += self.getAmountPoint(child)
         
-        return left + right + self.getPoint(node)
+        return sumation + self.getPoint(node)
 
     def checkMaxDepth(self, node, depth):
         if node is None:
@@ -69,11 +70,10 @@ class Tree:
         if node.MID == MID:
             return node
         
-        left = self.findNode(node.left, MID)
-        if left is not None:
-            return left
-        right = self.findNode(node.right, MID)
-        return right
+        for child in node.child:
+            found = self.findNode(child, MID)
+            if found is not None:
+                return found
 
     def inOrder(self, node):
         if (node is None):
@@ -90,8 +90,7 @@ class Node:
         self.color = color
         self.maxDepth = maxDepth
         self.parent = parent
-        self.right = None
-        self.left = None
+        self.child = []
 
     def toString(self):
         return f"MID : {self.MID} / PID : {self.PID} / COLOR : {self.color} / maxDepth : {self.maxDepth}"
