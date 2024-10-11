@@ -3,14 +3,11 @@ import sys
 input = sys.stdin.readline
 
 class Tree:
-    def __init__(self):
-        self.root = None
+
+    def __init__(self, MID, PID, color, maxDepth):
+        self.root = Node(MID, PID, color, maxDepth, None)
     
     def addNode(self, MID, PID, color, maxDepth):
-        if (PID == -1):
-            self.root = Node(MID, PID, color, maxDepth, None)
-            return
-
         parent = self.findNode(self.root, PID)
 
         if (parent is not None and self.checkMaxDepth(parent, 2)):
@@ -33,7 +30,9 @@ class Tree:
 
     def getNodeColor(self, MID):
         node = self.findNode(self.root, MID)
-        return node.color
+        if node is not None:
+            return node.color
+        return None
     
     def getPoint(self, node):
         def calc(node, colors):
@@ -45,9 +44,6 @@ class Tree:
                 cur += 1
 
             return calc(node.left, colors) + calc(node.right, colors) + cur
-        
-        # if node is not None:
-        #     print(node.MID, pow(calc(node, []), 2))
 
         return pow(calc(node, []), 2)
     
@@ -59,8 +55,6 @@ class Tree:
         right = self.getAmountPoint(node.right)
         
         return left + right + self.getPoint(node)
-
-        
 
     def checkMaxDepth(self, node, depth):
         if node is None:
@@ -89,7 +83,6 @@ class Tree:
         self.inOrder(node.right)
         
 
-    
 class Node:
     def __init__(self, MID, PID, color, maxDepth, parent):
         self.MID = MID
@@ -103,21 +96,43 @@ class Node:
     def toString(self):
         return f"MID : {self.MID} / PID : {self.PID} / COLOR : {self.color} / maxDepth : {self.maxDepth}"
 
+def addNode(trees, command):
+    if (command[2] == -1):
+        trees.append(Tree(command[1], command[2], command[3], command[4]))
+    else:
+        for tree in trees:
+            tree.addNode(command[1], command[2], command[3], command[4])
+
+def changeColor(trees, MID, color):
+    for tree in trees:
+        tree.changeColor(MID, color)
+
+def getNodeColor(trees, MID):
+    for tree in trees:
+        result = tree.getNodeColor(MID)
+        if result is not None:
+            return result
+
+def getAmountPoint(trees):
+    result = 0
+    for tree in trees:
+        result += tree.getAmountPoint(tree.root)
+    return result
 
 if __name__ == "__main__":
     Q = int(input())
-    tree = Tree()
+    trees = []
 
     for i in range(Q):
         command = list(map(int, input().split()))
         if (command[0] == 100):
-            tree.addNode(command[1], command[2], command[3], command[4])
+            addNode(trees, command)
         elif (command[0] == 200):
-            tree.changeColor(command[1], command[2])
+            changeColor(trees, command[1], command[2])
         elif (command[0] == 300):
-            color = tree.getNodeColor(command[1])
+            color = getNodeColor(trees, command[1])
             print(color)
         elif (command[0] == 400):
-            print(tree.getAmountPoint(tree.root))
-            
+            print(getAmountPoint(trees))
+    
     # tree.inOrder(tree.root)
