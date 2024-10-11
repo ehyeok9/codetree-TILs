@@ -121,17 +121,20 @@ def getAmountPoint(trees):
 if __name__ == "__main__":
     Q = int(input())
     trees = []
+    changeList = dict()
+    results = []
 
     for i in range(Q):
         command = list(map(int, input().split()))
         if (command[0] == 100):
             addNode(trees, command)
         elif (command[0] == 200):
+            # changeList[command[1]] = command[2]
             changeColor(trees, command[1], command[2])
         elif (command[0] == 300):
             color = getNodeColor(trees, command[1])
-            print(color)
+            results.append(str(color))
         elif (command[0] == 400):
-            print(getAmountPoint(trees))
+            results.append(str(getAmountPoint(trees)))
     
-    # tree.inOrder(tree.root)
+    print("\n".join(results))
